@@ -168,6 +168,7 @@ $data['data'][] = $row;
 									<label>País</label>
 									<select name="pais" id="pais" class="js-select ">
 										<option value="" selected>- Select país -</option>
+										<option value="VENEZUELA">Venezuela</option>
 										<option value="PANAMA">Panamá</option>
 										<option value="ESPANA">España</option>
 											<option value="USA">Usa</option>
