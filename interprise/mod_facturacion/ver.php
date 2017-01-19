@@ -379,10 +379,10 @@ var docDefinition = {
 	 
  
 
-{ text: '<?php echo TITULO2 ?> # '+id+'', style:'header' ,  alignment: 'right',margin: [ 0, 20, 0, 0 ]},		
+{ text: '<?php echo TITULO2 ?> # '+id+'', style:'header' ,  alignment: 'right',margin: [ 0, 80, 0, 0 ]},		
                
 
-{ text: 'Nombre o Razón social: '+enc_cliente+', Rif: '+enc_cliente_documento, fontSize: 12, bold: true ,  alignment: 'right',margin: [ 0, 5, 0, 0 ]},
+{ text: 'Nombre o Razón social: '+enc_cliente+', Rif: '+enc_cliente_documento, fontSize: 8, bold: true ,  alignment: 'right',margin: [ 0, 5, 0, 0 ]},
 
 { text: 'Dirección fiscal: '+enc_cliente_direccion, fontSize: 8 ,  alignment: 'right'},
 { text: 'Teléfono: '+enc_cliente_tel, fontSize: 8,  alignment: 'right'},
@@ -403,15 +403,15 @@ var docDefinition = {
         headerRows: 1,
  
 
-widths: [ 40, '*', 80, 60 , 60, 60],
+widths: [ 40, '*', 80, 70 , 60, 60],
    body: [
-          [ { text: 'Id', bold: true }, 
-          { text: 'Nombre', bold: true }, 
-          { text: 'Descripción', bold: true }, 
-          { text: 'Cantidad', bold: true }, 
+          [ { text: 'Id', bold: true , 	fontSize: 8}, 
+          { text: 'Concepto', bold: true, 	fontSize: 8 }, 
+          { text: 'Descripción', bold: true, 	fontSize: 8 }, 
+          { text: 'Cantidad', bold: true, 	fontSize: 8 }, 
         
-          { text: 'Subtotal', bold: true },  
-          { text: 'Total', bold: true },  
+          { text: 'Subtotal', bold: true, 	fontSize: 8 },  
+          { text: 'Total', bold: true, 	fontSize: 8 },  
           ],
 
 
@@ -427,9 +427,9 @@ widths: [ 40, '*', 80, 60 , 60, 60],
 
 /*=====  End of Aqui va el siclo de los items  ======*/
 [ '', '', '', '', '', ' '],
-   [ '', '', '', '',  {text: 'SUB-TOTAL:', bold: true, fontSize: 8 }, total_parcial ],
-      [ '', '', '', '',  {text: '<?php echo IVA ?>12%:', bold: true, fontSize: 8 }, total_tax],
-     [ '', '', '', '',  {text: '<?php echo TOTAL_A ?>', bold: true, fontSize: 12 }, {text: total_total, bold: true }],
+   [ '', '', '', '',  {text: 'SUB-TOTAL:', bold: true, fontSize: 8 }, {text: total_parcial, fontSize: 8 }],
+      [ '', '', '', '',  {text: '<?php echo IVA ?>12%:', bold: true, fontSize: 8 }, {text: total_tax, fontSize: 8}],
+     [ '', '', '', '',  {text: '<?php echo TOTAL_A ?>', bold: true, fontSize: 8 }, {text: total_total, bold: true, fontSize: 8 }],
           
         ]
       },
