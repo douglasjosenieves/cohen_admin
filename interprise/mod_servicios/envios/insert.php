@@ -20,17 +20,27 @@ extract ($_POST);
  
  $images = serialize($imagenes);
 
+$cantidad = ($cantidad=='') ? '0': $cantidad ;
+
+$pro_inv_max = ($pro_inv_max=='') ? '0': $pro_inv_max ;
+$pro_inv_min = ($pro_inv_min=='') ? '0': $pro_inv_min ;
 
 
+$precio1 = ($precio1=='') ? '0': $precio1 ;
+$precio2 = ($precio2=='') ? '0': $precio2 ;
+$precio3 = ($precio3=='') ? '0': $precio3 ;
+$precio_compra = ($precio_compra=='') ? '0': $precio_compra ;
 
- 
 
+$islr = ($islr=='') ? '0': $islr ;
+$tax = ($tax=='') ? '0': $tax ;
 
 $qry = "INSERT INTO `servicios`
 (
 `codigo`,
 `nombre`,
 `descripcion`,
+`comentarios`,
 `precio`,
 `precio1`,
 `precio2`,
@@ -39,9 +49,13 @@ $qry = "INSERT INTO `servicios`
 `cantidad`,
 `pro_inv_max`,
 `pro_inv_min`,
+
+`und_med`,
+`por_desperdicio`,
+
 `tax`,
 `islr`,
-`id_cat`,
+`id_categoria`,
 `estado`,
 `stock`,
 `tramitido_al_crm`,
@@ -58,17 +72,21 @@ VALUES
 '$codigo',
 '$nombre',
 '$descripcion',
+'$comentarios',
 $precio,
 $precio1,
 $precio2,
 $precio3,
 $precio_compra,
-$cantidad,
-$pro_inv_max,
-$pro_inv_min,
+'$cantidad',
+'$pro_inv_max',
+'$pro_inv_min',
+'$und_med',
+'$por_desperdicio',
+
 $tax,
 $islr,
-'$id_cat',
+'$id_categoria',
 '$estado',
 '$stock',
 '$tramitido_al_crm',
@@ -89,17 +107,21 @@ $resul = mysql_query($qry);
 
 
 
+ 
+$id_asignado = mysql_insert_id();
+
 if ($resul==1) {
   
-echo $resul;
+echo $resul.'-'.$id_asignado;
 }
 
 else
 {
 echo 'false'.$qry;
-
-
 }
+die;
+ 
+
 
  
 

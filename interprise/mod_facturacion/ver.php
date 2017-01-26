@@ -4,7 +4,7 @@ header('Location: ../index.php');
 }
 
 require_once '../../db_connect.php';
-require_once '../config.php'; 
+
 require_once 'envios/config.php';
 // connecting to db
 $con = new DB_CONNECT();

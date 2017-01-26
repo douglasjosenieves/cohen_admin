@@ -1,6 +1,3 @@
-<?php
-require_once 'nav_define.php';
-?>
 
 
 
@@ -21,12 +18,24 @@ $_SESSION['usuario']['Tipo']=='VENTAS'
 					<div><i class="zmdi zmdi-account-add zmdi-hc-fw icon"></i> <span class="hidden-xs hidden-sm">Clientes<i class="zmdi zmdi-plus plus"></i></span></div>
 					<ul>
 					<li><a href="<?php echo BASE_URL ?>mod_clientes/index.php" title="#">Nuevo </a></li>
-					<li><a href="<?php echo BASE_URL ?>mod_clientes/reporte_clientes.php" title="#">Ver</a></li>
-					<li><a href="<?php echo BASE_URL ?>mod_clientes/reporte_clientes_status.php" title="#">Ver por status</a></li>
+					<li><a href="<?php echo BASE_URL ?>mod_clientes/reporte.php" title="#">Ver</a></li>
+					<li><a href="<?php echo BASE_URL ?>mod_clientes/status.php" title="#">Ver por status</a></li>
 					<li><a href="<?php echo BASE_URL ?>mod_clientes/anulados.php" title="Administracion de contactos">Anulados</a> </li>
 			
+			   <li class="sub js-submenu">
+					<div class="sub-menu"><i class="zmdi zmdi-layers zmdi-hc-fw icon"></i> <span class="hidden-xs hidden-sm">Categoria<i class="zmdi zmdi-plus plus"></i></span></div>
+					<ul>
+<li><a href="<?php echo BASE_URL ?>mod_clientes_cat/index.php" >Nuevo</a></li>
+<li><a href="<?php echo BASE_URL ?>mod_clientes_cat/reporte.php" >Ver</a></li>
+
+			</ul>
+			</li>	
+
 			</ul>
 			</li>
+
+
+
 <?php endif ?>
 
 
@@ -47,6 +56,17 @@ $_SESSION['usuario']['Tipo']=='COMPRAS'
 					<li><a href="<?php echo BASE_URL ?>mod_proveedores/status.php" title="#">Ver por status</a></li>
 					<li><a href="<?php echo BASE_URL ?>mod_proveedores/anulados.php" title="Administracion de contactos">Anulados</a> </li>
 			
+
+
+			   <li class="sub js-submenu">
+					<div class="sub-menu"><i class="zmdi zmdi-layers zmdi-hc-fw icon"></i> <span class="hidden-xs hidden-sm">Categoria<i class="zmdi zmdi-plus plus"></i></span></div>
+					<ul>
+<li><a href="<?php echo BASE_URL ?>mod_proveedores_cat/index.php" >Nuevo</a></li>
+<li><a href="<?php echo BASE_URL ?>mod_proveedores_cat/reporte.php" >Ver</a></li>
+
+			</ul>
+			</li>	
+
 			</ul>
 			</li>
 					 
@@ -132,6 +152,31 @@ $_SESSION['usuario']['Tipo']=='ADMINISTRADOR'
 <li><a href="<?php echo BASE_URL ?>mod_articulos/inventario.php" title="#">Inventario Actual</a></li>
 <li><a href="<?php echo BASE_URL ?>mod_articulos/movimientos.php" title="#">Movimientos</a></li>
 
+			</ul>
+			</li>
+
+
+
+
+
+
+									<li class="sub js-submenu">
+					<div><i class="zmdi zmdi-balance-wallet zmdi-hc-fw icon"></i> <span class="hidden-xs hidden-sm">Servicios<i class="zmdi zmdi-plus plus"></i></span></div>
+					<ul>
+					<li><a href="<?php echo BASE_URL ?>mod_servicios/index.php" title="#">Nuevo </a></li>
+					<li><a href="<?php echo BASE_URL ?>mod_servicios/reporte.php" title="#">Ver</a></li>
+				 
+			
+		   <li class="sub js-submenu">
+					<div class="sub-menu"><i class="zmdi zmdi-layers zmdi-hc-fw icon"></i> <span class="hidden-xs hidden-sm">Categorias<i class="zmdi zmdi-plus plus"></i></span></div>
+					<ul>
+<li><a href="<?php echo BASE_URL ?>mod_articulos_cat/index.php" >Nuevo</a></li>
+<li><a href="<?php echo BASE_URL ?>mod_articulos_cat/reporte.php" >Ver</a></li>
+
+			</ul>
+			</li>	
+
+			
 			</ul>
 			</li>
 <?php endif ?>
@@ -312,6 +357,15 @@ $_SESSION['usuario']['Tipo']=='PAGOS'
 <li><a href="<?php echo BASE_URL ?>mod_seguimientos/index.php" title="#">Nuevo</a></li>
  <li><a href="<?php echo BASE_URL ?>mod_seguimientos/reporte-seguimientos-abiertos.php" title="#">Ver<span class="label label-danger">ABIERTO</span></a></li>
 
+    <li class="sub js-submenu">
+					<div class="sub-menu"><i class="zmdi zmdi-layers zmdi-hc-fw icon"></i> <span class="hidden-xs hidden-sm">Categoria<i class="zmdi zmdi-plus plus"></i></span></div>
+					<ul>
+<li><a href="<?php echo BASE_URL ?>mod_seguimientos_cat/index.php" >Nuevo</a></li>
+<li><a href="<?php echo BASE_URL ?>mod_seguimientos_cat/reporte.php" >Ver</a></li>
+
+			</ul>
+			</li>
+
 			</ul>
 			</li>	
 
@@ -345,15 +399,45 @@ $_SESSION['usuario']['Tipo']=='PAGOS'
 
  <?php if ($_SESSION['usuario']['Tipo']=='SUPERUSER'): ?>
  	
- 
+ <li class="sub js-submenu">
+					<div><i class="zmdi zmdi-accounts-add zmdi-hc-fw icon"></i> <span class="hidden-xs hidden-sm">Empleados<i class="zmdi zmdi-plus plus"></i></span></div>
+					<ul>
+					<li><a href="<?php echo BASE_URL ?>mod_empleados/index.php" title="#">Nuevo </a></li>
+					<li><a href="<?php echo BASE_URL ?>mod_empleados/reporte.php" title="#">Ver</a></li>
+					<li><a href="<?php echo BASE_URL ?>mod_empleados/status.php" title="#">Ver por status</a></li>
+					<li><a href="<?php echo BASE_URL ?>mod_empleados/anulados.php" title="Administracion de contactos">Anulados</a> </li>
+			
+			</ul>
+			</li>
  	
  
+
+  <li class="sub js-submenu">
+					<div><i class="zmdi zmdi zmdi-case zmdi-hc-fw icon"></i> <span class="hidden-xs hidden-sm">Vendedores<i class="zmdi zmdi-plus plus"></i></span></div>
+					<ul>
+					<li><a href="<?php echo BASE_URL ?>mod_vendedores/index.php" title="#">Nuevo </a></li>
+					<li><a href="<?php echo BASE_URL ?>mod_vendedores/reporte.php" title="#">Ver</a></li>
+					<li><a href="<?php echo BASE_URL ?>mod_vendedores/status.php" title="#">Ver por status</a></li>
+					<li><a href="<?php echo BASE_URL ?>mod_vendedores/anulados.php" title="Administracion de contactos">Anulados</a> </li>
+			
+			</ul>
+			</li>
 
 <li class="sub js-submenu">
 					<div><i class="zmdi zmdi-accounts-add zmdi-hc-fw icon"></i> <span class="hidden-xs hidden-sm">Usuarios<i class="zmdi zmdi-plus plus"></i></span></div>
 					<ul>
 <li><a href="<?php echo BASE_URL ?>mod_usuarios/index.php" title="Administracion de contactos">Nuevo</a> </li> 
 <li><a href="<?php echo BASE_URL ?>mod_usuarios/reporte.php" title="Administracion de contactos">Ver</a> </li> 
+
+			</ul>
+			</li>	
+
+
+			   <li class="sub js-submenu">
+					<div class="sub-menu"><i class="zmdi zmdi-layers zmdi-hc-fw icon"></i> <span class="hidden-xs hidden-sm">Taxonomias<i class="zmdi zmdi-plus plus"></i></span></div>
+					<ul>
+<li><a href="<?php echo BASE_URL ?>mod_taxonomias/index.php" >Nuevo</a></li>
+<li><a href="<?php echo BASE_URL ?>mod_taxonomias/reporte.php" >Ver</a></li>
 
 			</ul>
 			</li>	

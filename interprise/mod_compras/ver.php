@@ -4,7 +4,7 @@ header('Location: ../index.php');
 }
 
 require_once '../../db_connect.php';
-require_once '../config.php'; 
+
 require_once 'envios/config.php';
 // connecting to db
 $con = new DB_CONNECT();
@@ -61,7 +61,7 @@ foreach ($reg_id_uns as $key => $value) {
 	
 
 $reg .= "[";	
-$reg .= "{ text: '".$reg_id_uns[$key]."', fontSize: 8 }, ";
+$reg .= "{ text: '".$reg_id_uns[$key].' | %'.$reg_tax_uns[$key]."', fontSize: 8 }, ";
 $reg .= "{ text: '".strip_tags($reg_nombre_uns[$key])."', fontSize: 8 }, ";
 $reg .= "{ text: '".strip_tags($reg_descripcion_uns[$key])."', fontSize: 8 }, ";
 $reg .= "{ text: '".$reg_cantidad_uns[$key].$reg_und_med_uns[$key].' x '.$reg_precio_uns[$key].MONEDA."', fontSize: 8 }, ";
@@ -379,19 +379,20 @@ var docDefinition = {
 	 
  
 
-{ text: '<?php echo TITULO2 ?> # '+id+'', style:'header' ,  alignment: 'right',margin: [ 0, 80, 0, 0 ]},		
+{ text: '<?php echo TITULO2 ?> # '+id+'', style:'header' ,  alignment: 'right',margin: [ 0, 20, 0, 0 ]},		
                
 
-{ text: 'Nombre o Razón social: '+enc_cliente+', Rif: '+enc_cliente_documento, fontSize: 8, bold: true ,  alignment: 'right',margin: [ 0, 5, 0, 0 ]},
+{ text: ''+enc_cliente+' '+enc_cliente_documento, fontSize: 12, bold: true ,  alignment: 'right',margin: [ 0, 5, 0, 0 ]},
+{ text: enc_cliente_direccion, fontSize: 8 ,  alignment: 'right'},
+{ text: enc_cliente_tel, fontSize: 8,  alignment: 'right'},
+{ text: enc_cliente_email, fontSize: 8,  alignment: 'right'},
 
-{ text: 'Dirección fiscal: '+enc_cliente_direccion, fontSize: 8 ,  alignment: 'right'},
-{ text: 'Teléfono: '+enc_cliente_tel, fontSize: 8,  alignment: 'right'},
-{ text: 'Email: '+enc_cliente_email, fontSize: 8,  alignment: 'right'},
-
-{ text: 'Lugar Emisión: '+enc_lugar_emision +', Fecha Emisión: '+enc_fecha_emision, fontSize: 8,  alignment: 'right',margin: [ 0, 0, 0, 0 ]},
-{ text: 'Orden #: '+enc_orden, fontSize: 8,  alignment: 'right', margin: [ 0, 0, 0, 20 ]},
+{ text: enc_lugar_emision +' '+enc_fecha_emision, fontSize: 8,  alignment: 'right',margin: [ 0, 5, 0, 0 ]},
+{ text: 'Orden #: '+enc_orden, fontSize: 8,  alignment: 'right'},
 		
- 
+{ text: 'Comentarios: '+enc_comentarios, fontSize: 10,  alignment: 'left',margin: [ 0, 5, 0, 20 ]},
+{ text: 'Proyecto: '+ext1, fontSize: 10,  alignment: 'left',margin: [ 0, 5, 0, 20 ]},
+
 /*=============================================
 =            Aqui van los reglones            =
 =============================================*/
@@ -401,17 +402,15 @@ var docDefinition = {
         // you can declare how many rows should be treated as headers
          style: 'tableExample',
         headerRows: 1,
- 
-
-widths: [ 40, '*', 80, 70 , 60, 60],
+  widths: [ 30, '*', 90, 60 , 60, 60],
    body: [
-          [ { text: 'Id', bold: true , 	fontSize: 8}, 
-          { text: 'Concepto', bold: true, 	fontSize: 8 }, 
-          { text: 'Descripción', bold: true, 	fontSize: 8 }, 
-          { text: 'Cantidad', bold: true, 	fontSize: 8 }, 
+          [ { text: 'Id', bold: true }, 
+          { text: 'Nombre', bold: true }, 
+          { text: 'Descripción', bold: true }, 
+          { text: 'Cantidad', bold: true }, 
         
-          { text: 'Subtotal', bold: true, 	fontSize: 8 },  
-          { text: 'Total', bold: true, 	fontSize: 8 },  
+          { text: 'Subtotal', bold: true },  
+          { text: 'Total', bold: true },  
           ],
 
 
@@ -427,9 +426,9 @@ widths: [ 40, '*', 80, 70 , 60, 60],
 
 /*=====  End of Aqui va el siclo de los items  ======*/
 [ '', '', '', '', '', ' '],
-   [ '', '', '', '',  {text: 'SUB-TOTAL:', bold: true, fontSize: 8 }, {text: total_parcial, fontSize: 8 }],
-      [ '', '', '', '',  {text: '<?php echo IVA ?>12%:', bold: true, fontSize: 8 }, {text: total_tax, fontSize: 8}],
-     [ '', '', '', '',  {text: '<?php echo TOTAL_A ?>', bold: true, fontSize: 8 }, {text: total_total, bold: true, fontSize: 8 }],
+   [ '', '', '', '',  {text: 'SUB-TOTAL:', bold: true, fontSize: 8 }, total_parcial ],
+   [ '', '', '', '',  {text: '<?php echo IVA ?>:', bold: true, fontSize: 8 }, total_tax],
+     [ '', '', '', '',  {text: '<?php echo TOTAL_A ?>', bold: true, fontSize: 12 }, {text: total_total, bold: true }],
           
         ]
       },
