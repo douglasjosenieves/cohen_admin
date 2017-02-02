@@ -36,20 +36,22 @@ $reg_id_uns =  unserialize($data['data'][0]['reg_id']);
 $reg_nombre_uns =  unserialize($data['data'][0]['reg_nombre']);
 $reg_descripcion_uns =  unserialize($data['data'][0]['reg_descripcion']);
 
-$reg_und_med_uns =  unserialize($data['data'][0]['reg_und_med']);
-$reg_cantidad_uns =  unserialize($data['data'][0]['reg_cantidad']);
 
+$reg_cantidad_uns =  unserialize($data['data'][0]['reg_cantidad']);
+$reg_und_med_uns =  unserialize($data['data'][0]['reg_und_med']);
 
 $reg_precio_uns =  unserialize($data['data'][0]['reg_precio']);
 $reg_subtotal_uns =  unserialize($data['data'][0]['reg_subtotal']);
+ 
 $reg_subtotal_con_tax_uns =  unserialize($data['data'][0]['reg_subtotal_con_tax']);
 $reg_tax_uns =  unserialize($data['data'][0]['reg_tax']);
+
 $reg='';
 
 
 
 
-
+ 
  
 
 
@@ -62,22 +64,27 @@ $reg .= "[";
 $reg .= "{ text: '".$reg_id_uns[$key]."', fontSize: 8 }, ";
 $reg .= "{ text: '".strip_tags($reg_nombre_uns[$key])."', fontSize: 8 }, ";
 $reg .= "{ text: '".strip_tags($reg_descripcion_uns[$key])."', fontSize: 8 }, ";
-$reg .= "{ text: '".$reg_cantidad_uns[$key].$reg_und_med_uns[$key].' x '.$reg_precio_uns[$key].MONEDA."', fontSize: 8 }, ";
- 
-$reg .= "{ text: '".MONEDA.$reg_subtotal_uns[$key]."', fontSize: 8 }, ";
-$reg .= "{ text: '".MONEDA.$reg_subtotal_con_tax_uns[$key]."', fontSize: 8 }, ";
+$reg .= "{ text: '".$reg_cantidad_uns[$key].$reg_und_med_uns[$key].' x '.MONEDA.number_format($reg_precio_uns[$key], 2, ',', '.')."', fontSize: 8 }, "; 
+$reg .= "{ text: '".MONEDA.number_format($reg_subtotal_uns[$key], 2, ',', '.')."', fontSize: 8 }, ";
+
 $reg .= "],";
+
 
 }
 
 
-$total_parcial =  $data['data'][0]['total_parcial'];
+$total_parcial =  number_format($data['data'][0]['total_parcial'], 2, ',', '.');
 
-$total_tax =  $data['data'][0]['total_tax'];
-$total_total =  $data['data'][0]['total_total'];
+$total_tax =  number_format($data['data'][0]['total_tax'], 2, ',', '.');
+$total_total =  number_format($data['data'][0]['total_total'], 2, ',', '.');
  
  
 
+ $dateh =   $data['data'][0]['enc_fecha_emision']  ;
+ $date = date_create($dateh);
+$fechaEmis = date_format($date, 'd-m-Y'); 
+
+ 
 ?>
 <!doctype html>
 <html class="no-js" ng-app lang="es">
@@ -132,7 +139,7 @@ $total_total =  $data['data'][0]['total_total'];
 
 
 	<!-- Header -->
-	 
+ 
 	<?php  require_once '../header.php'; ?>
 	
 	<?php  require_once '../tareas-pendientes.php'; ?>
@@ -212,6 +219,8 @@ $total_total =  $data['data'][0]['total_total'];
 
 <?php    require_once '../status_estado.php'; ?>
  <div class="row">
+
+
  	<div class="col-xs-12 col-sm-4 i">
 								<div class="form-group">
 									<label>El documento se encuentra: <?php echo statusestado($estado); ?></label>
@@ -309,14 +318,14 @@ $total_total =  $data['data'][0]['total_total'];
 
 
 
-var id = '<?php echo $data['data'][0]['id'] ?>';
+var id = '<?php printf("%08d",$data['data'][0]['id']); ?>';
 var enc_cliente = '<?php echo $data['data'][0]['enc_cliente'] ?>';
 var enc_cliente_documento = '<?php echo $data['data'][0]['enc_cliente_documento'] ?>';
 var enc_cliente_direccion = '<?php echo $data['data'][0]['enc_cliente_direccion'] ?>';
 var enc_cliente_tel = '<?php echo $data['data'][0]['enc_cliente_tel'] ?>';
 var enc_cliente_email = '<?php echo $data['data'][0]['enc_cliente_email'] ?>';
 var enc_lugar_emision = '<?php echo $data['data'][0]['enc_lugar_emision'] ?>';
-var enc_fecha_emision = '<?php echo $data['data'][0]['enc_fecha_emision'] ?>';
+var enc_fecha_emision = '<?php echo $fechaEmis ?>';
 var enc_comentarios = '<?php echo $data['data'][0]['enc_comentarios'] ?>';
 var enc_orden = '<?php echo $data['data'][0]['enc_orden'] ?>';
  
@@ -362,7 +371,7 @@ var docDefinition = {
 	content: [
 		
 
-   {
+  {
        image: logo,
 		width: 150
     },
@@ -376,20 +385,19 @@ var docDefinition = {
 	 
  
 
-{ text: '<?php echo TITULO2 ?> # '+id+'', style:'header' ,  alignment: 'right',margin: [ 0, 20, 0, 0 ]},		
+{ text: '<?php echo TITULO2 ?> Nº '+id+'', style:'header' ,  alignment: 'right',margin: [ 0, 80, 0, 0 ]},		
                
 
-{ text: ''+enc_cliente+' '+enc_cliente_documento, fontSize: 12, bold: true ,  alignment: 'right',margin: [ 0, 5, 0, 0 ]},
-{ text: enc_cliente_direccion, fontSize: 8 ,  alignment: 'right'},
-{ text: enc_cliente_tel, fontSize: 8,  alignment: 'right'},
-{ text: enc_cliente_email, fontSize: 8,  alignment: 'right'},
+{ text: 'Nombre o Razón social: '+enc_cliente+', Rif: '+enc_cliente_documento, fontSize: 8, bold: true ,  alignment: 'right',margin: [ 0, 5, 0, 0 ]},
 
-{ text: enc_lugar_emision +' '+enc_fecha_emision, fontSize: 8,  alignment: 'right',margin: [ 0, 5, 0, 0 ]},
-{ text: 'Orden #: '+enc_orden, fontSize: 8,  alignment: 'right'},
+{ text: 'Dirección fiscal: '+enc_cliente_direccion, fontSize: 8 ,  alignment: 'right'},
+{ text: 'Teléfono: '+enc_cliente_tel, fontSize: 8,  alignment: 'right'},
+{ text: 'Email: '+enc_cliente_email, fontSize: 8,  alignment: 'right'},
+
+{ text: 'Lugar Emisión: '+enc_lugar_emision +', Fecha Emisión: '+enc_fecha_emision, fontSize: 8,  alignment: 'right',margin: [ 0, 0, 0, 0 ]},
+{ text: 'Orden #: '+enc_orden, fontSize: 8,  alignment: 'right', margin: [ 0, 0, 0, 20 ]},
 		
-{ text: 'Comentarios: '+enc_comentarios, fontSize: 10,  alignment: 'left',margin: [ 0, 5, 0, 20 ]},
-{ text: 'Proyecto: '+ext1, fontSize: 10,  alignment: 'left',margin: [ 0, 5, 0, 20 ]},
-
+ 
 /*=============================================
 =            Aqui van los reglones            =
 =============================================*/
@@ -399,17 +407,19 @@ var docDefinition = {
         // you can declare how many rows should be treated as headers
          style: 'tableExample',
         headerRows: 1,
-   widths: [ 30, '*', 90, 60 , 60, 60],
+ 
 
-        body: [
-          [ { text: 'Id', bold: true }, 
-          { text: 'Nombre', bold: true }, 
-          { text: 'Descripción', bold: true }, 
-          { text: 'Cantidad', bold: true }, 
+widths: [ 40, '*', 100, '*' , 60],
+   body: [
+          [ { text: 'Id', bold: true , 	fontSize: 8}, 
+          { text: 'Concepto', bold: true, 	fontSize: 8 }, 
+          { text: 'Descripción', bold: true, 	fontSize: 8 }, 
+          { text: 'Cantidad', bold: true, 	fontSize: 8 }, 
         
-          { text: 'Subtotal', bold: true },  
-          { text: 'Total', bold: true },  
+          { text: 'Subtotal', bold: true, 	fontSize: 8 },  
+    
           ],
+
 
 /*=====================================================
 =            Aqui va el siclo de los items            =
@@ -422,20 +432,20 @@ var docDefinition = {
 
 
 /*=====  End of Aqui va el siclo de los items  ======*/
-[ '', '', '', '', '', ' '],
-   [ '', '', '', '',  {text: 'SUB-TOTAL:', bold: true, fontSize: 8 }, total_parcial ],
-   [ '', '', '', '',  {text: '<?php echo IVA ?>12%:', bold: true, fontSize: 8 }, total_tax],
-     [ '', '', '', '',  {text: '<?php echo TOTAL_A ?>', bold: true, fontSize: 12 }, {text: total_total, bold: true }],
+[ '', '', '', '',  ' '],
+   [ '', '', '',   {text: 'SUB-TOTAL:', bold: true, fontSize: 8 }, {text: total_parcial, fontSize: 8 }],
+      [ '', '',  '',  {text: '<?php echo IVA ?>12% Base Imponible ' + total_parcial , bold: true, fontSize: 8 }, {text: total_tax, fontSize: 8}],
+     [ '', '',  '',  {text: '<?php echo TOTAL_A ?>', bold: true, fontSize: 8 }, {text: total_total, bold: true, fontSize: 8 }],
           
         ]
       },
 
       layout: {
                                                         hLineWidth: function(i, node) {
-                                                                return (i === 0 || i === node.table.body.length) ? 2 : 1;
+                                                                return (i === 0 || i === node.table.body.length) ? 0 : 0;
                                                         },
                                                         vLineWidth: function(i, node) {
-                                                                return (i === 0 || i === node.table.widths.length) ? 2 : 1;
+                                                                return (i === 0 || i === node.table.widths.length) ? 0 : 0;
                                                         },
                                                         hLineColor: function(i, node) {
                                                                 return (i === 0 || i === node.table.body.length) ? 'black' : 'gray';

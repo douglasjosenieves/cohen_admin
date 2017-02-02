@@ -64,23 +64,27 @@ $reg .= "[";
 $reg .= "{ text: '".$reg_id_uns[$key]."', fontSize: 8 }, ";
 $reg .= "{ text: '".strip_tags($reg_nombre_uns[$key])."', fontSize: 8 }, ";
 $reg .= "{ text: '".strip_tags($reg_descripcion_uns[$key])."', fontSize: 8 }, ";
-$reg .= "{ text: '".$reg_cantidad_uns[$key].$reg_und_med_uns[$key].' x '.$reg_precio_uns[$key].MONEDA."', fontSize: 8 }, ";
- 
-$reg .= "{ text: '".MONEDA.$reg_subtotal_uns[$key]."', fontSize: 8 }, ";
-$reg .= "{ text: '".MONEDA.$reg_subtotal_con_tax_uns[$key]."', fontSize: 8 }, ";
+$reg .= "{ text: '".$reg_cantidad_uns[$key].$reg_und_med_uns[$key].' x '.MONEDA.number_format($reg_precio_uns[$key], 2, ',', '.')."', fontSize: 8 }, ";  
+$reg .= "{ text: '".MONEDA.number_format($reg_subtotal_uns[$key], 2, ',', '.')."', fontSize: 8 }, ";
+
 $reg .= "],";
 
 
 }
 
 
-$total_parcial =  $data['data'][0]['total_parcial'];
+$total_parcial =  number_format($data['data'][0]['total_parcial'], 2, ',', '.');
 
-$total_tax =  $data['data'][0]['total_tax'];
-$total_total =  $data['data'][0]['total_total'];
+$total_tax =  number_format($data['data'][0]['total_tax'], 2, ',', '.');
+$total_total =  number_format($data['data'][0]['total_total'], 2, ',', '.');
  
  
 
+ $dateh =   $data['data'][0]['enc_fecha_emision']  ;
+ $date = date_create($dateh);
+$fechaEmis = date_format($date, 'd-m-Y'); 
+
+ 
 ?>
 <!doctype html>
 <html class="no-js" ng-app lang="es">
@@ -215,6 +219,8 @@ $total_total =  $data['data'][0]['total_total'];
 
 <?php    require_once '../status_estado.php'; ?>
  <div class="row">
+
+
  	<div class="col-xs-12 col-sm-4 i">
 								<div class="form-group">
 									<label>El documento se encuentra: <?php echo statusestado($estado); ?></label>
@@ -312,14 +318,14 @@ $total_total =  $data['data'][0]['total_total'];
 
 
 
-var id = '<?php echo $data['data'][0]['id'] ?>';
+var id = '<?php printf("%08d",$data['data'][0]['id']); ?>';
 var enc_cliente = '<?php echo $data['data'][0]['enc_cliente'] ?>';
 var enc_cliente_documento = '<?php echo $data['data'][0]['enc_cliente_documento'] ?>';
 var enc_cliente_direccion = '<?php echo $data['data'][0]['enc_cliente_direccion'] ?>';
 var enc_cliente_tel = '<?php echo $data['data'][0]['enc_cliente_tel'] ?>';
 var enc_cliente_email = '<?php echo $data['data'][0]['enc_cliente_email'] ?>';
 var enc_lugar_emision = '<?php echo $data['data'][0]['enc_lugar_emision'] ?>';
-var enc_fecha_emision = '<?php echo $data['data'][0]['enc_fecha_emision'] ?>';
+var enc_fecha_emision = '<?php echo $fechaEmis ?>';
 var enc_comentarios = '<?php echo $data['data'][0]['enc_comentarios'] ?>';
 var enc_orden = '<?php echo $data['data'][0]['enc_orden'] ?>';
  
@@ -379,7 +385,7 @@ var docDefinition = {
 	 
  
 
-{ text: '<?php echo TITULO2 ?> # '+id+'', style:'header' ,  alignment: 'right',margin: [ 0, 80, 0, 0 ]},		
+{ text: '<?php echo TITULO2 ?> Nº '+id+'', style:'header' ,  alignment: 'right',margin: [ 0, 80, 0, 0 ]},		
                
 
 { text: 'Nombre o Razón social: '+enc_cliente+', Rif: '+enc_cliente_documento, fontSize: 8, bold: true ,  alignment: 'right',margin: [ 0, 5, 0, 0 ]},
@@ -403,7 +409,7 @@ var docDefinition = {
         headerRows: 1,
  
 
-widths: [ 40, '*', 80, 70 , 60, 60],
+widths: [ 40, '*', 100, '*' , 60],
    body: [
           [ { text: 'Id', bold: true , 	fontSize: 8}, 
           { text: 'Concepto', bold: true, 	fontSize: 8 }, 
@@ -411,7 +417,7 @@ widths: [ 40, '*', 80, 70 , 60, 60],
           { text: 'Cantidad', bold: true, 	fontSize: 8 }, 
         
           { text: 'Subtotal', bold: true, 	fontSize: 8 },  
-          { text: 'Total', bold: true, 	fontSize: 8 },  
+    
           ],
 
 
@@ -426,10 +432,10 @@ widths: [ 40, '*', 80, 70 , 60, 60],
 
 
 /*=====  End of Aqui va el siclo de los items  ======*/
-[ '', '', '', '', '', ' '],
-   [ '', '', '', '',  {text: 'SUB-TOTAL:', bold: true, fontSize: 8 }, {text: total_parcial, fontSize: 8 }],
-      [ '', '', '', '',  {text: '<?php echo IVA ?>10%:', bold: true, fontSize: 8 }, {text: total_tax, fontSize: 8}],
-     [ '', '', '', '',  {text: '<?php echo TOTAL_A ?>', bold: true, fontSize: 8 }, {text: total_total, bold: true, fontSize: 8 }],
+[ '', '', '', '',  ' '],
+   [ '', '', '',   {text: 'SUB-TOTAL:', bold: true, fontSize: 8 }, {text: total_parcial, fontSize: 8 }],
+      [ '', '',  '',  {text: '<?php echo IVA ?>10% Base Imponible ' + total_parcial , bold: true, fontSize: 8 }, {text: total_tax, fontSize: 8}],
+     [ '', '',  '',  {text: '<?php echo TOTAL_A ?>', bold: true, fontSize: 8 }, {text: total_total, bold: true, fontSize: 8 }],
           
         ]
       },
