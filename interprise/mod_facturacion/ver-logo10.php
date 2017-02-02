@@ -424,7 +424,7 @@ var docDefinition = {
 /*=====  End of Aqui va el siclo de los items  ======*/
 [ '', '', '', '', '', ' '],
    [ '', '', '', '',  {text: 'SUB-TOTAL:', bold: true, fontSize: 8 }, total_parcial ],
-   [ '', '', '', '',  {text: '<?php echo IVA ?>12%:', bold: true, fontSize: 8 }, total_tax],
+   [ '', '', '', '',  {text: '<?php echo IVA ?>: 10%', bold: true, fontSize: 8 }, total_tax],
      [ '', '', '', '',  {text: '<?php echo TOTAL_A ?>', bold: true, fontSize: 12 }, {text: total_total, bold: true }],
           
         ]

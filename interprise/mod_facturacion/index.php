@@ -188,7 +188,7 @@ $imagenes = unserialize($imagenes);
 <div class="col-xs-12 col-sm-4 col-sm-offset-2">
 <div class="form-group">
 <label for="basicInput">Buscar <?php echo TITULO3 ?>:</label>
-<input type="text" value="<?php echo $data['data'][0]['buscar'] ?>" class="form-control" name="buscar" id="buscar" placeholder="Buscar:" style="background-color: #accead; font-weight: 800;">
+<input autocomplete="off" type="text" value="<?php echo $data['data'][0]['buscar'] ?>" class="form-control" name="buscar" id="buscar" placeholder="Buscar:" style="background-color: #accead; font-weight: 800;">
 </div>
 
 <div >
@@ -311,6 +311,24 @@ $v++;}
 
 </div>
 </div>
+
+ 
+<div class="col-xs-12 col-sm-4">
+<div class="form-group">
+<label for="basicInput">Iva de la factura:</label>
+
+<select required id="ext2" name="ext2" data-id=""  class="js-select">
+<option  value="" >- Seleccionar -</option>
+<option value="10">10%</option>
+<option value="12">12%</option>
+</select>	
+
+</div>
+</div>
+
+
+
+
 </div>
 <!-- informacion adicional opcional -->
  
@@ -560,7 +578,6 @@ if (isset($importar)) {
 	/*==========================================================
 =            AJAX REQUES        =
 ==========================================================*/
- 
 
 
 $(document).ready(function() {

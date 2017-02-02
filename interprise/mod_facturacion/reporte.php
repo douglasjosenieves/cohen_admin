@@ -90,6 +90,8 @@ mysql_query("SET CHARACTER_SET utf");
 								   <th><?php echo TITULO3 ?></th>
 									<th>fecha</th>
 									<th>Orden</th>
+									<th>total </th>
+								 
 									 
 								 <th>Estado</th>
 									<th>Procesos</th>
@@ -140,19 +142,42 @@ require_once '../asesor_funtion.php';
 						<td><?php echo $opciones['opciones'][$i]['enc_cliente']; ?></td>
 					    <td><?php echo $opciones['opciones'][$i]['fecha']; ?></td>
 					    <td><?php echo $opciones['opciones'][$i]['enc_orden']; ?></td>
+					    <td><?php echo $opciones['opciones'][$i]['total_total']; ?></td>
 					     <td><?php echo statusestado($estado); ?></td>
 			 
 					    <td>
 					    	
+
+
 					 <!-- Button Extra small -->
 						<div class="btn-group">
 							<button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Procesos <i class="fa fa-chevron-down"></i>
 							</button>
 							<ul class="dropdown-menu">
+								
+ <?php if ($opciones['opciones'][$i]['ext2']=='12'): ?>
+ 	
+ 
 								<li><a href="../<?php echo MODULO ?>/ver.php?tipo=editar&id=<?php echo $opciones['opciones'][$i]['id']; ?>" title="#"><i class="fa fa-eye"></i>Formato Blanco</a></li>
+										<li><a href="../<?php echo MODULO ?>/ver-logo.php?tipo=editar&id=<?php echo $opciones['opciones'][$i]['id']; ?>" title="#"><i class="fa fa-eye"></i>Formato Web</a></li>
+
+									<?php endif ?> 
+ 	
+ <?php if ($opciones['opciones'][$i]['ext2']=='10'): ?>
+
+								<li><a href="../<?php echo MODULO ?>/ver10.php?tipo=editar&id=<?php echo $opciones['opciones'][$i]['id']; ?>" title="#"><i class="fa fa-eye"></i>Formato Blanco</a></li>
+
+								
+
+							<li><a href="../<?php echo MODULO ?>/ver-logo10.php?tipo=editar&id=<?php echo $opciones['opciones'][$i]['id']; ?>" title="#"><i class="fa fa-eye"></i>Formato Web</a></li>
+						<?php endif ?>
+
 							
-						<li><a href="../<?php echo MODULO ?>/ver-logo.php?tipo=editar&id=<?php echo $opciones['opciones'][$i]['id']; ?>" title="#"><i class="fa fa-eye"></i>Formato Web</a></li>
+				
+
+
+
 								
 							<!-- 	<li><a href="reporte-clientes-excel.php?id=<?php //echo $opciones['opciones'][$i]['id']; ?>" title="Exportar a excel"><i class="fa fa-file-excel-o"></i> Exportar a EXCEL</a></li> -->
 							</ul>
@@ -170,7 +195,7 @@ require_once '../asesor_funtion.php';
 					
 					
 						
-						
+					
 						
 								
 								

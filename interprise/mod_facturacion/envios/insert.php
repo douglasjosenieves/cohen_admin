@@ -72,7 +72,8 @@ $qry = "INSERT INTO `".TABLA1."`
 `imagenes`,
 `ip`,
 `anulado`,
-`ext1`)
+`ext1`,
+`ext2`)
 VALUES
 (
 
@@ -108,7 +109,9 @@ VALUES
 '$imagenes',
 '$ip',
 '$anulado',
-'$ext1');
+'$ext1',
+'$ext2'
+);
 ";
  
 

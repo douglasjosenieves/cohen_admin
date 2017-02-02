@@ -1,7 +1,7 @@
 <?php 
 
 /*LOS NOMBRE DE LAS TABLAS QUE AFECTAN*/
-define('TITULO',"Obras / Proyectos");  /*TITULO DEL LAS VISTAS */
+define('TITULO',"Proyectos");  /*TITULO DEL LAS VISTAS */
 define('TEXTO',"Clientes");  /*TITULO DEL LAS VISTAS */
 
  
