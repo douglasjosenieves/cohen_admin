@@ -52,6 +52,7 @@ $enc_lugar_emision= $import['import'][0]['enc_lugar_emision'];
 $enc_orden= $import['import'][0]['enc_orden'];
 $enc_comentarios= $import['import'][0]['enc_comentarios'];
 $ext1= $import['import'][0]['ext1'];
+$ext2= $import['import'][0]['ext2'];
  
 $reg_id= $import['import'][0]['reg_id'];
 $reg_nombre= $import['import'][0]['reg_nombre'];
@@ -584,6 +585,7 @@ $(document).ready(function() {
 
 
 	$('#ext1').val('<?php echo $ext1 ?>').change();
+	$('#ext2').val('<?php echo $ext2 ?>').change();
 
 //enc_lugar_emision
 

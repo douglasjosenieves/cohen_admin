@@ -307,6 +307,20 @@ $v++;}
 
 </div>
 </div>
+
+
+<div class="col-xs-12 col-sm-4">
+<div class="form-group">
+<label for="basicInput">Iva de la factura:</label>
+
+<select required id="ext2" name="ext2" data-id=""  class="js-select">
+<option  value="" >- Seleccionar -</option>
+<option value="10">10%</option>
+<option value="12">12%</option>
+</select>	
+
+</div>
+</div>
 </div>
 <!-- informacion adicional opcional -->
  
